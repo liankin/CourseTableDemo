@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private AddCourseDialog addCourseDialog;
     private int maxClassNumber = 0;//课程表左侧的最大节数
     private int currentCourseNumber = 1; //课程表左侧的当前节数
-    private LinearLayout layoutDay = null; //星期几
+    private RelativeLayout layoutDay = null; //星期几
     private DatabaseHelper databaseHelper = new DatabaseHelper(this, "database.db", null, 1); //SQLite Helper类
     private ArrayList<CourseMode> courseList = new ArrayList<>(); //用于程序启动时从数据库加载多个课程对象
 
@@ -104,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 创建课程表左边"节数"的视图
+     * 创建课程表左边"节数"的视图：
+     * 根据课程结束的节数来判断要不要增加"节数"视图
      * @param course
      */
     private void createCourseNumberView(CourseMode course) {
@@ -126,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 创建卡片课程视图
+     * 创建此课程的卡片视图
      * @param course
      */
     private void createCourseInfoView(final CourseMode course) {
@@ -134,22 +137,35 @@ public class MainActivity extends AppCompatActivity {
         if ((integer < 1 && integer > 7) || course.getStart() > course.getEnd()) {
             Toast.makeText(this, "星期几没写对,或课程结束时间比开始时间还早~~", Toast.LENGTH_LONG).show();
         } else {
+            //若使用LinearLayout，View控件添加的位置偏移会不受控制。
             switch (integer) {
-                case 1: layoutDay = (LinearLayout) findViewById(R.id.layout_monday);break;
-                case 2: layoutDay = (LinearLayout) findViewById(R.id.layout_tuesday);break;
-                case 3: layoutDay = (LinearLayout) findViewById(R.id.layout_wednesday);break;
-                case 4: layoutDay = (LinearLayout) findViewById(R.id.layout_thursday);break;
-                case 5: layoutDay = (LinearLayout) findViewById(R.id.layout_friday);break;
-                case 6: layoutDay = (LinearLayout) findViewById(R.id.layout_saturday);break;
-                case 7: layoutDay = (LinearLayout) findViewById(R.id.layout_weekday);break;
+                case 1: layoutDay = (RelativeLayout) findViewById(R.id.layout_monday);break;
+                case 2: layoutDay = (RelativeLayout) findViewById(R.id.layout_tuesday);break;
+                case 3: layoutDay = (RelativeLayout) findViewById(R.id.layout_wednesday);break;
+                case 4: layoutDay = (RelativeLayout) findViewById(R.id.layout_thursday);break;
+                case 5: layoutDay = (RelativeLayout) findViewById(R.id.layout_friday);break;
+                case 6: layoutDay = (RelativeLayout) findViewById(R.id.layout_saturday);break;
+                case 7: layoutDay = (RelativeLayout) findViewById(R.id.layout_weekday);break;
             }
             final View courseCardView = LayoutInflater.from(this).inflate(R.layout.item_course_card, null); //加载单个课程布局
             courseCardView.setY(HEIGHT_SINGLE_COURSE_NUMBER * (course.getStart()-1)); //设置开始高度,即第几节课开始
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-                    (ViewGroup.LayoutParams.MATCH_PARENT,(course.getEnd()-course.getStart()+1) * HEIGHT_SINGLE_COURSE_NUMBER - 2); //设置布局高度,即跨多少节课
+                    (ViewGroup.LayoutParams.MATCH_PARENT,(course.getEnd()-course.getStart()+1)*HEIGHT_SINGLE_COURSE_NUMBER - 2); //设置布局高度,即跨多少节课
             courseCardView.setLayoutParams(params);
             TextView tvCourseInfo = courseCardView.findViewById(R.id.tv_course_info);
             tvCourseInfo.setText(course.getCourseName() + "\n" + course.getTeacher() + "\n" + course.getClassRoom()); //显示课程名
+            Random random = new Random();
+            int index = random.nextInt(8);//生成0-8之间的随机数，包括0，不包括8
+            switch (index){
+                case 0: tvCourseInfo.setBackgroundColor(this.getResources().getColor(R.color.colorRed)); break;
+                case 1: tvCourseInfo.setBackgroundColor(this.getResources().getColor(R.color.colorOrange)); break;
+                case 2: tvCourseInfo.setBackgroundColor(this.getResources().getColor(R.color.colorYellow)); break;
+                case 3: tvCourseInfo.setBackgroundColor(this.getResources().getColor(R.color.colorGreen)); break;
+                case 4: tvCourseInfo.setBackgroundColor(this.getResources().getColor(R.color.colorCyan)); break;
+                case 5: tvCourseInfo.setBackgroundColor(this.getResources().getColor(R.color.colorBlue)); break;
+                case 6: tvCourseInfo.setBackgroundColor(this.getResources().getColor(R.color.colorPurple)); break;
+                case 7: tvCourseInfo.setBackgroundColor(this.getResources().getColor(R.color.colorScarlet)); break;
+            }
             layoutDay.addView(courseCardView);
             //点击删除课程
             courseCardView.setOnClickListener(new View.OnClickListener() {

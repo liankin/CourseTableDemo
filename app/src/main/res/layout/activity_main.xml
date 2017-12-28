@@ -82,49 +82,49 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"/>
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/layout_monday"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_margin="1dp"/>
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/layout_tuesday"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_margin="1dp"/>
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/layout_wednesday"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_margin="1dp"/>
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/layout_thursday"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_margin="1dp"/>
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/layout_friday"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_margin="1dp"/>
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/layout_saturday"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_margin="1dp"/>
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/layout_weekday"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
