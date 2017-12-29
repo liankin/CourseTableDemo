@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -36,6 +37,20 @@ public class AddCourseDialog extends Dialog {
     Button btnCancel;
     @BindView(R.id.btn_ok)
     Button btnOk;
+    @BindView(R.id.layout_course_name)
+    LinearLayout layoutCourseName;
+    @BindView(R.id.layout_week)
+    LinearLayout layoutWeek;
+    @BindView(R.id.layout_course_start)
+    LinearLayout layoutCourseStart;
+    @BindView(R.id.layout_end)
+    LinearLayout layoutEnd;
+    @BindView(R.id.layout_teacher)
+    LinearLayout layoutTeacher;
+    @BindView(R.id.layout_room)
+    LinearLayout layoutRoom;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
     public AddCourseDialog(@NonNull Context context) {
         super(context, R.style.dialog_add_course);
@@ -64,11 +79,15 @@ public class AddCourseDialog extends Dialog {
         });
     }
 
-    public void setBtnSure(View.OnClickListener listener){
+    public void setTvTitle(String title) {
+        this.tvTitle.setText(title);
+    }
+
+    public void setBtnSure(View.OnClickListener listener) {
         btnOk.setOnClickListener(listener);
     }
 
-    public void setBtnCancel(View.OnClickListener listener){
+    public void setBtnCancel(View.OnClickListener listener) {
         btnCancel.setOnClickListener(listener);
     }
 
@@ -95,5 +114,30 @@ public class AddCourseDialog extends Dialog {
     public EditText getEdCourseRoom() {
         return edCourseRoom;
     }
+
+    public LinearLayout getLayoutCourseName() {
+        return layoutCourseName;
+    }
+
+    public LinearLayout getLayoutWeek() {
+        return layoutWeek;
+    }
+
+    public LinearLayout getLayoutCourseStart() {
+        return layoutCourseStart;
+    }
+
+    public LinearLayout getLayoutEnd() {
+        return layoutEnd;
+    }
+
+    public LinearLayout getLayoutTeacher() {
+        return layoutTeacher;
+    }
+
+    public LinearLayout getLayoutRoom() {
+        return layoutRoom;
+    }
+
 
 }

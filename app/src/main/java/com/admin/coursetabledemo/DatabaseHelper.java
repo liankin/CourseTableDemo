@@ -20,6 +20,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "day integer," +
                 "start integer," +
                 "end integer)");
+        db.execSQL("create table coursetime(" +
+                "id integer primary key autoincrement," +
+                "courseindex integer," +
+                "starttime text," +
+                "endtime text)");
     }
 
     @Override
