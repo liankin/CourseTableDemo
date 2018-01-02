@@ -15,4 +15,4 @@
 
 效果图：
 --
-![](https://github.com/liankin/CourseTableDemo/raw/master/drawable/img_result.png)  
+![](https://github.com/liankin/CourseTableDemo/blob/master/app/src/main/res/drawable/img_result.png)  
